@@ -1,4 +1,4 @@
 variable "env" {
-  default= "prod"
+  default= "dev"
   description = "environment"
 }

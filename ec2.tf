@@ -3,7 +3,7 @@
 # can write pub in code , so use arguments
 
 resource "aws_key_pair" "my_key" {
-  key_name   = "terra-key-ec2"
+  key_name   = "terra-key-ec2-dev"
   public_key = file("terra-key-ec2.pub")
 }
 
@@ -14,7 +14,7 @@ resource "aws_default_vpc" "default_vpc" {
 
 #aws SG group
 resource "aws_security_group" "my_security_group" {
-  name        = "auto-sg"
+  name        = "auto-sg-dev"
   description = "i am creating TF generated SG"
   vpc_id      = aws_default_vpc.default_vpc.id //interpolation - inherite values from main source
 
@@ -64,7 +64,7 @@ resource "aws_instance" "linux-server" {
   #count = 2
   for_each = tomap({
     "linux-1-t2micro" = "t2.micro"
-    "linux-2-medium"  = "t2.medium"
+    #"linux-2-medium"  = "t2.medium"
   })
   key_name        = aws_key_pair.my_key.key_name
   security_groups = [aws_security_group.my_security_group.name]
