@@ -82,7 +82,7 @@ resource "aws_instance" "linux-server" {
   user_data = file("script.sh")
 
   tags = {
-    name = each.key
+    Name = each.key
     environment = var.env
   }
 
